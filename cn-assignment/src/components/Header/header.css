@@ -1,0 +1,30 @@
+.header-area {
+  background: url("../../images/header-image.png");
+  height: 245px;
+  color: #fff;
+  padding-top: 73px;
+  padding-left: 65px;
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: 700;
+}
+
+h5 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 560px) {
+  .header-area {
+    padding-left: 45px;
+  }
+  h1 {
+    font-size: 40px;
+  }
+
+  h5 {
+    font-size: 20px;
+  }
+}
