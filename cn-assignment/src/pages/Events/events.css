@@ -18,12 +18,9 @@
 }
 
 .event__category__links:hover,
-.event__category__links:active {
+.event__category__links:active,
+.event__category__links:target {
   background: #fa7328;
-  color: #fff;
-}
-
-.event__category__links .links:hover {
   color: #fff;
 }
 
@@ -33,11 +30,19 @@
   align-items: center;
 }
 
-.event__category__links .links {
+.links {
   text-decoration: none;
   font-size: 1.2rem;
   margin-left: 5px;
   color: #948e8e;
+  outline: none;
+  border: 0;
+}
+
+.links:hover,
+.links:focus {
+  color: #fff;
+  background: #fa7328;
 }
 
 .event__background {
@@ -56,4 +61,8 @@
   border: 1px solid #fa7328;
   padding: 0.2rem;
   transition: 0.6s;
+}
+
+.tags button {
+  background: none;
 }
