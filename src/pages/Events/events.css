@@ -5,16 +5,28 @@
   margin: 60px auto;
 }
 
+.event__cards {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.event__cards > * {
+  margin-bottom: 2rem;
+}
+
 .event__category,
 .event__sub__category {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
   color: #948e8e;
+  white-space: nowrap;
+  overflow: auto;
 }
 
-.event__sub__category {
-  justify-content: space-around;
+.ediv{
+  margin-right: 15px;
 }
 
 .event__category__links:hover,

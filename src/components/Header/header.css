@@ -28,3 +28,11 @@ h5 {
     font-size: 20px;
   }
 }
+
+
+/* media queries */
+@media screen and (max-width: 360px){
+  .header-area{
+    padding-left: 0;
+  }
+}
