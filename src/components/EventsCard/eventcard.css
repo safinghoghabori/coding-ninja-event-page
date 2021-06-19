@@ -2,6 +2,14 @@
   flex-basis:48%;
 }
 
+.cardImg{
+  height:170px;
+}
+
+.card-short-desc{
+  font-size:0.8rem;
+}
+
 .sub__details {
   display: flex;
   flex-wrap: wrap;
@@ -22,7 +30,7 @@ p {
 .sub__tags {
   display: flex;
   flex-wrap: wrap;
-  height: 64px;
+  height: fit-content;
   margin-top: 20px;
 }
 

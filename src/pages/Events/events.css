@@ -12,6 +12,11 @@
   justify-content: space-between;
 }
 
+.event__cards h2{
+  flex-basis:100%;
+  text-align: center;
+}
+
 .event__cards > * {
   margin-bottom: 2rem;
 }

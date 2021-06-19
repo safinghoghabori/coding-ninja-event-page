@@ -17,11 +17,12 @@ import Card from "../../components/EventsCard/EventsCard";
 const Events = () => {
     const [eventTags, setEventTags] = useState('');
 
-    const [cardsDetails, setCardsDetails] = useState([]);
-
-    const [mainCategory, setMainCategory] = useState('');
-    const [subCategory, setSubCategory] = useState('');
+    const [mainCategory, setMainCategory] = useState('ALL_EVENTS');
+    const [subCategory, setSubCategory] = useState('Upcoming');
     const [tags, setTags] = useState([]);
+
+    const [cards, setCards] = useState([]);
+
 
     useEffect(() => {
         axios.get('https://api.codingninjas.com/api/v3/event_tags')
@@ -32,16 +33,18 @@ const Events = () => {
 
     useEffect(() => {
         axios.get(`https://api.codingninjas.com/api/v3/events?event_category=${mainCategory}&event_sub_category=${subCategory}&tag_list=${tags}&offset=0`)
-            .then((res) => console.log(res))
+            .then((res) => setCards(res.data.data.events))
             .catch((error) => console.log(error))
-    }, [mainCategory])
+    }, [mainCategory, subCategory])
+    console.log('cards...', cards)
 
     const onMainCategory = (e) => {
-        // setMainCategory(e.target.value)
+        setMainCategory(e.target.value)
         console.log(e.target.value)
     }
 
     const onSubCategory = (e) => {
+        setSubCategory(e.target.value);
         console.log(e.target.value)
     }
 
@@ -63,19 +66,19 @@ const Events = () => {
                         </div>
                         <div className='event__category__links ediv'>
                             <FontAwesomeIcon icon={faLaptopCode} style={{ fontSize: '1.2rem' }} />
-                            <button className='links' value='WEBINARS' onClick={onMainCategory}>Webinars</button>
+                            <button className='links' value='WEBINAR' onClick={onMainCategory}>Webinars</button>
                         </div>
                         <div className='event__category__links ediv'>
                             <FontAwesomeIcon icon={faCode} style={{ fontSize: '1.2rem' }} />
-                            <button className='links' value='CODING_EVENTS' onClick={onMainCategory}>Coding Events</button>
+                            <button className='links' value='CODING_EVENT' onClick={onMainCategory}>Coding Events</button>
                         </div>
                         <div className='event__category__links ediv'>
                             <FontAwesomeIcon icon={faRoute} style={{ fontSize: '1.2rem' }} />
-                            <button className='links' value='BOOTCAMP_EVENTS' onClick={onMainCategory}>Bootcamp Events</button>
+                            <button className='links' value='BOOTCAMP_EVENT' onClick={onMainCategory}>Bootcamp Events</button>
                         </div>
                         <div className='event__category__links ediv'>
                             <FontAwesomeIcon icon={faPlaceOfWorship} style={{ fontSize: '1.2rem' }} />
-                            <button className='links' value='WORKSHOPS' onClick={onMainCategory}>Workshops</button>
+                            <button className='links' value='WORKSHOP' onClick={onMainCategory}>Workshops</button>
                         </div>
                     </div>
                     <hr />
@@ -88,7 +91,7 @@ const Events = () => {
                             <button className='links' onClick={onSubCategory} value='Archived'>Archived</button>
                         </div>
                         <div className='event__category__links ediv'>
-                            <button className='links' onClick={onSubCategory} value='ALL_TIME_FAVOURITES'>All Time Favorites</button>
+                            <button className='links' onClick={onSubCategory} value='ALL_TIME_FAVORITES'>All Time Favorites</button>
                         </div>
                     </div>
                 </div>
@@ -100,7 +103,13 @@ const Events = () => {
                     )}
                 </div><hr />
                 <div className='event__cards'>
-                    <Card /><Card /><Card />
+                    {cards.length === 0 ? (
+                        <h2>No events found</h2>
+                    ) : (
+                        cards.map((card, i) => (
+                            <Card card={card} key={i} />
+                        ))
+                    )}
                 </div>
             </div>
         </>
