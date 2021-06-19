@@ -13,6 +13,9 @@ import { faPlaceOfWorship } from '@fortawesome/free-solid-svg-icons'
 // components import
 import './events.css'
 import Card from "../../components/EventsCard/EventsCard";
+import leftArrow from '../../images/left-arrow.svg';
+import rightArrow from '../../images/right-arrow.svg';
+
 
 const Events = () => {
     const [eventTags, setEventTags] = useState('');
@@ -110,6 +113,11 @@ const Events = () => {
                             <Card card={card} key={i} />
                         ))
                     )}
+                </div>
+                <div className='pagination'>
+                    <a href="#"><img src={leftArrow} /></a>
+                    <div className='pages'>Page 1 of 1</div>
+                    <a href="#"><img src={rightArrow} /></a>
                 </div>
             </div>
         </>

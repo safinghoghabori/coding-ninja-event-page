@@ -83,3 +83,24 @@
 .tags button {
   background: none;
 }
+
+.pagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom:10px;
+}
+
+.pagination a{
+  background:#fc9d69;
+  box-shadow: 0 2px 4px rgb(24 4 50 / 24%);
+  border-radius:4px;
+  padding:12px 18px;
+}
+
+.pagination div{
+  margin:0 14px;
+  color:#616161;
+  font-size:16px;
+  font-weight: 600;
+}
