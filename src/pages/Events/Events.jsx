@@ -24,12 +24,10 @@ const Events = () => {
 
     const [mainCategory, setMainCategory] = useState('ALL_EVENTS');
     const [subCategory, setSubCategory] = useState('Upcoming');
-    const [tags, setTags] = useState([]);
+    const [tags, setTags] = useState({ arr: [] });
     const [tagsCombinedString, setTagsCombinedString] = useState('')
 
     const [cards, setCards] = useState([]);
-
-    const [isActiveTag, setIsActiveTag] = useState(null)
 
     useEffect(() => {
         axios.get('https://api.codingninjas.com/api/v3/event_tags')
@@ -43,50 +41,49 @@ const Events = () => {
             .then((res) => setCards(res.data.data.events))
             .catch((error) => console.log(error))
     }, [mainCategory, subCategory, tags])
-    console.log('cards...', cards)
 
+    const [activeState, setActiveState] = useState('')
     const onMainCategory = (e) => {
+        setActiveState('')
         setMainCategory(e.target.value)
-        console.log(e.target.value)
+        setActiveState(e.target.value)
     }
+
 
     const onSubCategory = (e) => {
         setSubCategory(e.target.value);
-        console.log(e.target.value)
     }
 
     //check if tags are already selected
     const onTags = (e) => {
-        console.log('inside onTags it is...')
-        console.log('arr ontags...', arr)
-        console.log('e...', e.target.innerText)
         if (arr.length > 0) {
             let count = 0;
             arr.forEach(element => {
-                if (element == e.target.value) {
+                if (element == e.target.innerText) {
                     count++;
 
-                    const index = arr.indexOf(e.target.value);
+                    const index = arr.indexOf(e.target.innerText);
                     if (index > -1) {
                         arr.splice(index, 1);
                     }
                 }
             });
             if (count === 0) {
-                arr.push(e.target.value);
+                arr.push(e.target.innerText);
             }
         } else {
-            arr.push(e.target.value);
+            arr.push(e.target.innerText);
         }
         setTags({ arr })
         console.log('arr...', arr)
+        console.log('tags...', tags)
         stringOperations();
     }
 
     // convert object into strings
     const stringOperations = () => {
         const arrStrings = tags.arr;
-        const combinedString = arrStrings && arrStrings.filter((str) => {
+        const combinedString = arrStrings.filter((str) => {
             return str
         }).join(', ')
         setTagsCombinedString(combinedString)
@@ -99,36 +96,36 @@ const Events = () => {
                     <div className='event__category'>
                         <div className='event__category__links ediv'>
                             <FontAwesomeIcon icon={faCalendarDay} style={{ fontSize: '1.2rem' }} />
-                            <button className='links' value='ALL_EVENTS' onClick={onMainCategory} >All Events</button>
+                            <button className={activeState === 'ALL_EVENTS' ? 'links tags__bg' : 'links'} value='ALL_EVENTS' onClick={onMainCategory} >All Events</button>
                         </div>
                         <div className='event__category__links ediv'>
                             <FontAwesomeIcon icon={faLaptopCode} style={{ fontSize: '1.2rem' }} />
-                            <button className='links' value='WEBINAR' onClick={onMainCategory}>Webinars</button>
+                            <button className={activeState === 'WEBINAR' ? 'links tags__bg' : 'links'} value='WEBINAR' onClick={onMainCategory}>Webinars</button>
                         </div>
                         <div className='event__category__links ediv'>
                             <FontAwesomeIcon icon={faCode} style={{ fontSize: '1.2rem' }} />
-                            <button className='links' value='CODING_EVENT' onClick={onMainCategory}>Coding Events</button>
+                            <button className={activeState === 'CODING_EVENT' ? 'links tags__bg' : 'links'} value='CODING_EVENT' onClick={onMainCategory}>Coding Events</button>
                         </div>
                         <div className='event__category__links ediv'>
                             <FontAwesomeIcon icon={faRoute} style={{ fontSize: '1.2rem' }} />
-                            <button className='links' value='BOOTCAMP_EVENT' onClick={onMainCategory}>Bootcamp Events</button>
+                            <button className={activeState === 'BOOTCAMP_EVENT' ? 'links tags__bg' : 'links'} value='BOOTCAMP_EVENT' onClick={onMainCategory}>Bootcamp Events</button>
                         </div>
                         <div className='event__category__links ediv'>
                             <FontAwesomeIcon icon={faPlaceOfWorship} style={{ fontSize: '1.2rem' }} />
-                            <button className='links' value='WORKSHOP' onClick={onMainCategory}>Workshops</button>
+                            <button className={activeState === 'WORKSHOP' ? 'links tags__bg' : 'links'} value='WORKSHOP' onClick={onMainCategory}>Workshops</button>
                         </div>
                     </div>
                     <hr />
 
                     <div className='event__sub__category'>
                         <div className='event__category__links ediv'>
-                            <button className='links' onClick={onSubCategory} value='Upcoming'>Upcoming</button>
+                            <button className='sub__links' onClick={onSubCategory} value='Upcoming'>Upcoming</button>
                         </div>
                         <div className='event__category__links ediv'>
-                            <button className='links' onClick={onSubCategory} value='Archived'>Archived</button>
+                            <button className='sub__links' onClick={onSubCategory} value='Archived'>Archived</button>
                         </div>
                         <div className='event__category__links ediv'>
-                            <button className='links' onClick={onSubCategory} value='ALL_TIME_FAVORITES'>All Time Favorites</button>
+                            <button className='sub__links' onClick={onSubCategory} value='ALL_TIME_FAVORITES'>All Time Favorites</button>
                         </div>
                     </div>
                 </div>
@@ -147,9 +144,9 @@ const Events = () => {
                     )}
                 </div>
                 <div className='pagination'>
-                    <a href="#"><img src={leftArrow} /></a>
+                    <a><img src={leftArrow} /></a>
                     <div className='pages'>Page 1 of 1</div>
-                    <a href="#"><img src={rightArrow} /></a>
+                    <a><img src={rightArrow} /></a>
                 </div>
             </div>
         </>

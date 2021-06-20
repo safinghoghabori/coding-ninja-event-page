@@ -47,7 +47,7 @@
   align-items: center;
 }
 
-.links {
+.links,.sub__links {
   text-decoration: none;
   font-size: 1.2rem;
   margin-left: 5px;
@@ -57,8 +57,14 @@
   cursor: pointer;
 }
 
-.links:hover,
-.links:focus {
+.links:hover {
+  color: #fff;
+  background: #fa7328;
+  text-decoration: none;
+}
+
+.sub__links:hover,
+.sub__links:focus {
   color: #fff;
   background: #fa7328;
   text-decoration: none;
