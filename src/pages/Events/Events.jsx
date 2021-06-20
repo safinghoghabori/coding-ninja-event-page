@@ -39,7 +39,7 @@ const Events = () => {
         axios.get(`https://api.codingninjas.com/api/v3/events?event_category=${mainCategory}&event_sub_category=${subCategory}&tag_list=${tagsCombinedString}&offset=0`)
             .then((res) => setCards(res.data.data.events))
             .catch((error) => console.log(error))
-    }, [mainCategory, subCategory, tags])
+    }, [mainCategory, subCategory, tags, tagsCombinedString])
 
     const [activeState, setActiveState] = useState('')
     const onMainCategory = (e) => {
