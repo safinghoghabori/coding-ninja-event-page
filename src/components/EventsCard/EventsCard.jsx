@@ -8,7 +8,7 @@ import { Card } from 'react-bootstrap'
 import './eventcard.css'
 
 const EventsCard = ({ card }) => {
-    const { card_tags, cover_picture, start_time, end_time, event_start_time, event_end_time, fees, id, name, registered_users, registration_end_time, registration_status, seats_filled, short_desc, venue } = card;
+    const { card_tags, cover_picture, start_time, end_time, event_start_time, name, seats_filled, short_desc, venue } = card;
 
     // formatted date and time
     const e_start_time = new Date(start_time * 1000).toLocaleDateString('en-US', {
@@ -51,7 +51,7 @@ const EventsCard = ({ card }) => {
                 <Card.Title>{name}</Card.Title>
                 <Card.Text className='card-short-desc'>
                     {short_desc}
-                    {card_tags && !card_tags.length == 0 && (
+                    {card_tags && !card_tags.length === 0 && (
                         <div className='sub__tags'>
                             {card_tags && card_tags.map((tag, i) => (
                                 <div className='sub__tags__detail' key={i}>{tag}</div>
@@ -76,8 +76,8 @@ const EventsCard = ({ card }) => {
                 </Card.Title>
                 <hr />
                 <div className='card__footer'>
-                    <p className='bottom__text'>Hurry up! <b>{seats_filled == 0 ? 'Be the first to register' : `${seats_filled} people already registered.`} </b></p>
-                    {isInFuture && <img src={registerImg} alt='register image' />}
+                    <p className='bottom__text'>Hurry up! <b>{seats_filled === 0 ? 'Be the first to register' : `${seats_filled} people already registered.`} </b></p>
+                    {isInFuture && <img src={registerImg} alt='register' />}
                 </div>
             </Card.Body>
         </Card>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 
 // fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -59,7 +58,7 @@ const Events = () => {
         if (arr.length > 0) {
             let count = 0;
             arr.forEach(element => {
-                if (element == e.target.innerText) {
+                if (element === e.target.innerText) {
                     count++;
 
                     const index = arr.indexOf(e.target.innerText);
@@ -144,9 +143,9 @@ const Events = () => {
                     )}
                 </div>
                 <div className='pagination'>
-                    <a><img src={leftArrow} /></a>
+                    <a href='#!'><img src={leftArrow} alt='left arrow' /></a>
                     <div className='pages'>Page 1 of 1</div>
-                    <a><img src={rightArrow} /></a>
+                    <a href='#!'><img src={rightArrow} alt='right arrow' /></a>
                 </div>
             </div>
         </>

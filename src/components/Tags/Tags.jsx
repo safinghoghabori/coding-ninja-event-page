@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import '../../pages/Events/events.css'
 
 const Tags = ({ tag, onClick }) => {
@@ -7,7 +6,7 @@ const Tags = ({ tag, onClick }) => {
     }
     return (
         <div className='event__category__links tags'>
-            <a className='links' id='event__tags' onClick={(e) => { onHandleTags(e); onClick(e); }} value={tag} >{tag}</a>
+            <a href="#!" className='links' id='event__tags' onClick={(e) => { onHandleTags(e); onClick(e); }} value={tag} >{tag}</a>
         </div>
     )
 }
