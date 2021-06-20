@@ -35,8 +35,8 @@
 }
 
 .event__category__links:hover,
-.event__category__links:active,
-.event__category__links:target {
+.event__category__links:active
+{
   background: #fa7328;
   color: #fff;
 }
@@ -54,12 +54,14 @@
   color: #948e8e;
   outline: none;
   border: 0;
+  cursor: pointer;
 }
 
 .links:hover,
 .links:focus {
   color: #fff;
   background: #fa7328;
+  text-decoration: none;
 }
 
 .event__background {
@@ -77,7 +79,6 @@
 .tags {
   border: 1px solid #fa7328;
   padding: 0.2rem;
-  transition: 0.6s;
 }
 
 .tags button {
@@ -103,4 +104,9 @@
   color:#616161;
   font-size:16px;
   font-weight: 600;
+}
+
+.tags__bg{
+  background-color:#fa7328 ;
+  color: #fff;
 }

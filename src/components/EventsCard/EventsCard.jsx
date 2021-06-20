@@ -10,9 +10,6 @@ import './eventcard.css'
 const EventsCard = ({ card }) => {
     const { card_tags, cover_picture, start_time, end_time, event_start_time, event_end_time, fees, id, name, registered_users, registration_end_time, registration_status, seats_filled, short_desc, venue } = card;
 
-    console.log('event_start_time...', new Date(event_start_time * 1000))
-    // console.log('start_time...', new Date(start_time * 1000))
-    console.log('end_time...', new Date(end_time * 1000))
     // formatted date and time
     const e_start_time = new Date(start_time * 1000).toLocaleDateString('en-US', {
         year: 'numeric',

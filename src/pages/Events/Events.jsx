@@ -15,7 +15,9 @@ import './events.css'
 import Card from "../../components/EventsCard/EventsCard";
 import leftArrow from '../../images/left-arrow.svg';
 import rightArrow from '../../images/right-arrow.svg';
+import Tags from "../../components/Tags/Tags";
 
+let arr = [];
 
 const Events = () => {
     const [eventTags, setEventTags] = useState('');
@@ -23,9 +25,11 @@ const Events = () => {
     const [mainCategory, setMainCategory] = useState('ALL_EVENTS');
     const [subCategory, setSubCategory] = useState('Upcoming');
     const [tags, setTags] = useState([]);
+    const [tagsCombinedString, setTagsCombinedString] = useState('')
 
     const [cards, setCards] = useState([]);
 
+    const [isActiveTag, setIsActiveTag] = useState(null)
 
     useEffect(() => {
         axios.get('https://api.codingninjas.com/api/v3/event_tags')
@@ -35,10 +39,10 @@ const Events = () => {
     }, [])
 
     useEffect(() => {
-        axios.get(`https://api.codingninjas.com/api/v3/events?event_category=${mainCategory}&event_sub_category=${subCategory}&tag_list=${tags}&offset=0`)
+        axios.get(`https://api.codingninjas.com/api/v3/events?event_category=${mainCategory}&event_sub_category=${subCategory}&tag_list=${tagsCombinedString}&offset=0`)
             .then((res) => setCards(res.data.data.events))
             .catch((error) => console.log(error))
-    }, [mainCategory, subCategory])
+    }, [mainCategory, subCategory, tags])
     console.log('cards...', cards)
 
     const onMainCategory = (e) => {
@@ -51,11 +55,41 @@ const Events = () => {
         console.log(e.target.value)
     }
 
-    let arr = [];
+    //check if tags are already selected
     const onTags = (e) => {
-        arr.push(e.target.value)
-        setTags(arr)
-        console.log(arr)
+        console.log('inside onTags it is...')
+        console.log('arr ontags...', arr)
+        console.log('e...', e.target.innerText)
+        if (arr.length > 0) {
+            let count = 0;
+            arr.forEach(element => {
+                if (element == e.target.value) {
+                    count++;
+
+                    const index = arr.indexOf(e.target.value);
+                    if (index > -1) {
+                        arr.splice(index, 1);
+                    }
+                }
+            });
+            if (count === 0) {
+                arr.push(e.target.value);
+            }
+        } else {
+            arr.push(e.target.value);
+        }
+        setTags({ arr })
+        console.log('arr...', arr)
+        stringOperations();
+    }
+
+    // convert object into strings
+    const stringOperations = () => {
+        const arrStrings = tags.arr;
+        const combinedString = arrStrings && arrStrings.filter((str) => {
+            return str
+        }).join(', ')
+        setTagsCombinedString(combinedString)
     }
 
     return (
@@ -100,9 +134,7 @@ const Events = () => {
                 </div>
                 <div className='taglist'>
                     {eventTags && eventTags.map((tag, i) =>
-                        <div className='event__category__links tags' key={i}>
-                            <button className='links' onClick={onTags} value={tag} >{tag}</button>
-                        </div>
+                        <Tags key={i} tag={tag} onClick={(e) => onTags(e)} />
                     )}
                 </div><hr />
                 <div className='event__cards'>
